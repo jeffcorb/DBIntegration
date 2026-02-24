@@ -83,6 +83,7 @@ public class CustomerTest extends BaseTest {
 
     @Test
     @Tag("DBIntegration")
+    @Tag("NegativeCustomer")
     @DisplayName("NEGATIVE - Should fail when inserting duplicate email")
     void shouldFailOnDuplicateEmail() {
 
@@ -96,7 +97,7 @@ public class CustomerTest extends BaseTest {
                         sql,
                         "Duplicate",
                         "User",
-                        "john@test.com", // ya existe
+                        "john@test.com",
                         "ACTIVE"
                 )
         );

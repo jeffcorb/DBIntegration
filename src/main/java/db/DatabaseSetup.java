@@ -9,16 +9,10 @@ public class DatabaseSetup {
         try (Connection conn = DBConnection.getConnection();
              Statement stmt = conn.createStatement()) {
 
-            // Drop tables
-            stmt.execute("DROP TABLE IF EXISTS orders");
-            stmt.execute("DROP TABLE IF EXISTS products");
-            stmt.execute("DROP TABLE IF EXISTS employees");
-            stmt.execute("DROP TABLE IF EXISTS customers");
-
             // CREATE TABLES
 
             stmt.execute("""
-                        CREATE TABLE customers (
+                        CREATE TABLE IF NOT EXISTS customers (
                             id INT AUTO_INCREMENT PRIMARY KEY,
                             first_name VARCHAR(50) NOT NULL,
                             last_name VARCHAR(50) NOT NULL,
@@ -30,7 +24,7 @@ public class DatabaseSetup {
 
             // Employees
             stmt.execute("""
-                        CREATE TABLE employees (
+                        CREATE TABLE IF NOT EXISTS employees (
                             id INT AUTO_INCREMENT PRIMARY KEY,
                             first_name VARCHAR(50) NOT NULL,
                             last_name VARCHAR(50) NOT NULL,
@@ -42,7 +36,7 @@ public class DatabaseSetup {
 
             // Products
             stmt.execute("""
-                        CREATE TABLE products (
+                        CREATE TABLE IF NOT EXISTS products (
                             id INT AUTO_INCREMENT PRIMARY KEY,
                             name VARCHAR(100) NOT NULL,
                             price DECIMAL(10,2) CHECK (price > 0),
@@ -53,7 +47,7 @@ public class DatabaseSetup {
 
             // Orders
             stmt.execute("""
-                        CREATE TABLE orders (
+                        CREATE TABLE IF NOT EXISTS orders (
                             id INT AUTO_INCREMENT PRIMARY KEY,
                             customer_id INT,
                             employee_id INT,
